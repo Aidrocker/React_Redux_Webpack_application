@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { setCurrentPage } from '../../reducers/repos-reducer';
 import { createPages } from '../../utils/pageCreator';
 import { getRepos } from '../actions/repos';
@@ -11,14 +12,15 @@ const Main = () => {
     const repos = useSelector(state => state.repos.items);
     const isFetching = useSelector(state => state.repos.isFetching);
     const currentPage = useSelector(state => state.repos.currentPage);
+    const isFetchError = useSelector(state => state.repos.isFetchError)
     const totalCount = useSelector(state => state.repos.totalCount);
     const perPage = useSelector(state => state.repos.purePage);
     const [searchValue, setSearchValue] = useState("");
-    const pagesCount = Math.ceil(totalCount/perPage);
+    const pagesCount = Math.ceil(totalCount / perPage);
     const pages = []
     createPages(pages, pagesCount, currentPage)
 
-   
+
 
     useEffect(() => {
         dispatch(getRepos(searchValue, currentPage, perPage))
@@ -29,8 +31,13 @@ const Main = () => {
         dispatch(getRepos(searchValue, currentPage, perPage))
     }
 
+
     return (
         <div className="main">
+            {
+                isFetching &&
+                 <Error/>   
+            }
             <div className="search">
                 <input value={searchValue} onChange={(e) => setSearchValue(e.target.value)} className='search-input' />
                 <button onClick={() => searchHandler()} className="search-btn">Search</button>
