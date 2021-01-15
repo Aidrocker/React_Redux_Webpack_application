@@ -1,0 +1,13 @@
+import {combineReducers} from 'redux'; // обьединяет все редьюсеры
+import {createStore, applyMiddleware} from 'redux'; // 1. создать стор 2. подключить redux-thunk
+import reposReducer from './repos-reducer';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
+ 
+
+
+const rootReducer = combineReducers({
+    repos: reposReducer,
+})
+
+export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
