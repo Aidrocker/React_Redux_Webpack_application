@@ -10,7 +10,7 @@ const Repo = (props) => {
                     {repo.name}
                 </div>
                 <div className="repo-header-stars">
-                    {repo.startgazers_count}
+                    Колличество звезд: {repo.stargazers_count}
                 </div>
             </div>
             <div className="repo-last-commit">
