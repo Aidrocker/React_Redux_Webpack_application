@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import Main from './main/Main';
 import './app.less';
+import Card from './card/card';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -10,7 +11,11 @@ const App = () => {
     return (
         <BrowserRouter>
             <div className="container">
-                <Route path='/' component={Main} />
+                <Switch>
+                    <Route path='/' exact component={Main} />
+                    <Route path='/card' component={Card} />
+                    <Redirect to='/'/>
+                </Switch>
             </div>
         </BrowserRouter>
     )

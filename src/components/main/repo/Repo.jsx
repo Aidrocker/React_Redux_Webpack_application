@@ -1,4 +1,5 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 import './repo.less'
 
 const Repo = (props) => {
@@ -7,7 +8,9 @@ const Repo = (props) => {
         <div className="repo">
             <div className="repo-header">
                 <div className="repo-header-name">
-                    {repo.name}
+                    <NavLink to={`/card`}>
+                        {repo.name}
+                    </NavLink>
                 </div>
                 <div className="repo-header-stars">
                     Колличество звезд: {repo.stargazers_count}
